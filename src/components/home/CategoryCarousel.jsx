@@ -18,18 +18,15 @@ export function CategoryCarousel() {
         <strong>Shop with Categories</strong>
       </h4>
       <Carousel className="relative">
-        <CarouselContent className="flex flex-nowrap gap-2 sm:gap-4 -ml-1">
+        <CarouselContent className="flex flex-nowrap -ml-1">
           {categories?.map((item, index) => (
             <CarouselItem
               key={item?._id}
-              className="pl-1 basis-full sm:basis-1/2 md:basis-1/3 lg:basis-1/5 xl:basis-1/5"
+              className="pl-1 basis-full sm:basis-1/2 md:basis-1/3 lg:basis-1/5"
             >
               <div className="p-2">
-                <Card>
-                  <CardContent
-                    className="flex flex-col items-center justify-center p-3 
-                  rounded hover:ring-1 hover:shadow trans"
-                  >
+                <Card className="rounded hover:ring-1 hover:shadow-lg trans">
+                  <CardContent className="flex flex-col items-center justify-center p-3">
                     <div className="h-44">
                       <img
                         className="h-full w-full object-contain max-w-full"
