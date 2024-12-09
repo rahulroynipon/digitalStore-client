@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import Home from "./pages/Home";
 import { useDispatch } from "react-redux";
 import { fetchCategories } from "./features/category/categorySlice";
+import Header from "./components/global/Header";
 
 function App() {
   const dispatch = useDispatch();
@@ -9,7 +10,8 @@ function App() {
     dispatch(fetchCategories());
   }, [dispatch]);
   return (
-    <section className="width">
+    <section>
+      <Header />
       <Home />
     </section>
   );

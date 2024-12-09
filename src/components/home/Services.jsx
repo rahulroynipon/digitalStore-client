@@ -3,6 +3,8 @@ import payment from "./../../assets/payment.svg";
 import support from "./../../assets/support.svg";
 import returns from "./../../assets/return.svg";
 import { cn } from "./../../lib/utils";
+import { motion } from "framer-motion";
+import { CardAnimationVariants } from "./../../motion";
 
 export default function Services() {
   const serviceHeader = [
@@ -29,13 +31,19 @@ export default function Services() {
   ];
 
   return (
-    <section className="border rounded p-3">
-      <ul className="flex flex-wrap items-center justify-between">
+    <motion.section
+      variants={CardAnimationVariants}
+      initial="initial"
+      whileInView="animate"
+      viewport={{ once: true, amount: 0.3 }}
+      className="border rounded p-3 padding-x"
+    >
+      <ul className=" grid md:grid-cols-2 lg:grid-cols-4">
         {serviceHeader.map((item, index) => (
           <li
             key={index}
             className={cn(
-              "flex items-center gap-5 p-3 w-full min-w-[10rem] lg:w-1/4 lg:justify-center",
+              "flex items-center lg:justify-center gap-3 py-4",
               index < serviceHeader.length - 1 ? "lg:border-r" : ""
             )}
           >
@@ -54,6 +62,6 @@ export default function Services() {
           </li>
         ))}
       </ul>
-    </section>
+    </motion.section>
   );
 }

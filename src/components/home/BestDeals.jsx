@@ -32,9 +32,9 @@ export default function BestDeals() {
           <img src={arrow} alt="arrow" />
         </p>
       </div>
-      <div className="grid md:grid-cols-2  lg:grid-cols-3 xl:grid-cols-4">
-        <Card className="row-span-2 rounded-none trans hover:shadow-2xl">
-          <CardContent className="pb-0">
+      <div className="grid grid-cols-2  lg:grid-cols-3 xl:grid-cols-4">
+        <Card className="row-span-2 col-span-2 md:col-span-1 rounded-none trans hover:shadow-2xl">
+          <CardContent className="pb-0 pt-1 px-2">
             <div className="px-2 py-1 text-sm font-medium my-2 bg-yellow-300 inline-block">
               {products?.data[0]?.discount || "00"}% OFF
             </div>
@@ -47,21 +47,21 @@ export default function BestDeals() {
             </div>
           </CardContent>
 
-          <CardHeader className="pb-2">
-            <div className="mb-4">
+          <CardHeader className="pb-1 px-2 pt-3 md:pb-1 md:px-6">
+            <div>
               <Rating
                 name="read-only"
                 value={products?.data[0]?.totalrating || 4}
                 readOnly
               />
             </div>
-            <CardTitle className="text-md leading-6 line-clamp-2 text-gray-900 font-medium flex flex-col gap-5">
+            <CardTitle className="text-sm md:text-base leading-5 line-clamp-2 text-gray-900 font-medium flex flex-col gap-5">
               {products?.data[0]?.title}
             </CardTitle>
           </CardHeader>
 
-          <CardFooter className="pt-1 flex flex-col items-start gap-2">
-            <div className="flex gap-3 mt-4">
+          <CardFooter className="pt-1 px-2 md:px-6 flex flex-col items-start gap-2">
+            <div className="flex gap-3 mt-2">
               <p className="font-medium text-gray-600 line-through text-lg">
                 {products?.data[0]?.price || "00"}TK
               </p>
@@ -74,7 +74,7 @@ export default function BestDeals() {
               </p>
             </div>
 
-            <div className=" mt-5 w-full flex items-center gap-2 justify-center">
+            <div className="mt-2 w-full flex items-center gap-2 justify-center">
               <Button className="bg-orange-200 hover:bg-orange-300 rounded-none trans w-16">
                 <img src={love} alt="love" />
               </Button>
@@ -102,8 +102,8 @@ export default function BestDeals() {
             custom={index}
             className="rounded-none border trans hover:shadow-2xl group"
           >
-            <CardContent className="relative">
-              <div className="absolute inset-0 group-hover:bg-black/40 trans flex items-center justify-center gap-10">
+            <CardContent className="relative p-2 md:px-4">
+              <div className="absolute inset-0 group-hover:bg-black/40 trans flex items-center justify-center space-x-4 md:space-x-8">
                 <Button className="bg-orange-200 hover:bg-orange-300 rounded-full h-10 w-10 p-0 trans opacity-0 group-hover:opacity-100">
                   <img src={love} alt="love" />
                 </Button>
@@ -118,7 +118,7 @@ export default function BestDeals() {
               <div className="px-2 py-1 text-sm font-medium my-2 bg-yellow-300 inline-block">
                 {item?.discount || "00"}% OFF
               </div>
-              <div className="h-36">
+              <div className="md:h-36">
                 <img
                   className="h-full w-full object-contain"
                   src={item?.images[0]}
@@ -126,13 +126,13 @@ export default function BestDeals() {
                 />
               </div>
             </CardContent>
-            <CardHeader className="pb-2">
-              <CardTitle className="text-md leading-5 line-clamp-2 text-gray-900 font-medium">
+            <CardHeader className="pb-1 px-2 pt-3 md:pb-1 md:px-6">
+              <CardTitle className="text-sm md:text-base leading-5 line-clamp-2 text-gray-900 font-medium">
                 {item?.title}
               </CardTitle>
             </CardHeader>
 
-            <CardFooter className="pt-1 flex gap-2">
+            <CardFooter className="pt-1 px-2 md:px-6 flex flex-col items-start md:flex-row md:gap-2">
               <p className="font-medium text-gray-600 line-through">
                 {item?.price || "00"}TK
               </p>
