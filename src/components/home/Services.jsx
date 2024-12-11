@@ -36,7 +36,7 @@ export default function Services() {
       initial="initial"
       whileInView="animate"
       viewport={{ once: true, amount: 0.3 }}
-      className="border rounded p-3 padding-x"
+      className="border rounded p-3 padding-x mt-16"
     >
       <ul className=" grid md:grid-cols-2 lg:grid-cols-4">
         {serviceHeader.map((item, index) => (

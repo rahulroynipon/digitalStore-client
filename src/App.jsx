@@ -1,19 +1,32 @@
-import { useEffect } from "react";
-import Home from "./pages/Home";
-import { useDispatch } from "react-redux";
+import { useEffect, useState, useRef, useCallback } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { fetchCategories } from "./features/category/categorySlice";
-import Header from "./components/global/Header";
+
+import Home from "./pages/Home";
+import { BrowserRouter, Route, Routes } from "react-router";
+import Layout from "./components/global/Layout";
 
 function App() {
   const dispatch = useDispatch();
-  useEffect(() => {
+
+  const loadCategories = useCallback(() => {
     dispatch(fetchCategories());
   }, [dispatch]);
+
+  useEffect(() => {
+    loadCategories();
+  }, [loadCategories]);
+
   return (
-    <section>
-      <Header />
-      <Home />
-    </section>
+    <>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Layout />}>
+            <Route index element={<Home />} />
+          </Route>
+        </Routes>
+      </BrowserRouter>
+    </>
   );
 }
 

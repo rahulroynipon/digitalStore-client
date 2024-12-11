@@ -33,7 +33,7 @@ export default function BestDeals() {
         </p>
       </div>
       <div className="grid grid-cols-2  lg:grid-cols-3 xl:grid-cols-4">
-        <Card className="row-span-2 col-span-2 md:col-span-1 rounded-none trans hover:shadow-2xl">
+        <Card className="row-span-2 col-span-2 md:col-span-1 rounded-none trans hover:shadow-2xl flex flex-col gap-1 justify-between">
           <CardContent className="pb-0 pt-1 px-2">
             <div className="px-2 py-1 text-sm font-medium my-2 bg-yellow-300 inline-block">
               {products?.data[0]?.discount || "00"}% OFF

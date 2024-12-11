@@ -1,81 +1,113 @@
-import twitter from "./../../assets/twitter.svg";
-import facebook from "./../../assets/facebook.svg";
-import instragram from "./../../assets/instragram.svg";
-import youtube from "./../../assets/youtube.svg";
+import React, { useState, useEffect } from "react";
+import { motion } from "framer-motion";
 import whiteLove from "./../../assets/whiteLove.svg";
 import whiteCart from "./../../assets/whiteCart.svg";
 import person from "./../../assets/person.svg";
-import shop from "./../../assets/shop.svg";
+import search from "./../../assets/search.svg";
+import whiteSearch from "./../../assets/whiteSearch.svg";
+import menu from "./../../assets/menu.svg";
 import { cn } from "./../../lib/utils";
 import { Input } from "../ui/input";
+import { Button } from "../ui/button";
 
-export default function Header() {
-  const contact = [
-    { image: facebook, alt: "Facebook" },
-    { image: instragram, alt: "Instagram" },
-    { image: youtube, alt: "YouTube" },
-    { image: twitter, alt: "Twitter" },
-  ];
+export default function Header({ isOpen, setOpen }) {
+  const [isSticky, setIsSticky] = useState(false);
+  const [isMobileSearchVisible, setMobileSearchVisible] = useState(false);
 
-  const navItem = [
-    { image: whiteCart, alt: "cart" },
-    { image: whiteLove, alt: "wishlist" },
-    { image: person, alt: "account" },
-  ];
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsSticky(window.scrollY > 500);
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   return (
-    <header className="bg-header mb-16 text-white">
-      <div className="flex flex-col items-center justify-center padding-x">
-        <section className="width w-full py-3 flex justify-between items-center text-white">
-          <p>Welcome to Digital Store online eCommerce store.</p>
+    <motion.header
+      className={cn(
+        "w-full z-40 bg-header text-white",
+        isSticky ? "sticky top-0" : "relative"
+      )}
+      initial={{ y: -100 }}
+      animate={{ y: 0 }}
+      transition={{
+        duration: 0.5,
+        ease: "easeInOut",
+      }}
+    >
+      <div className="padding-x">
+        <section className="width w-full py-2 md:py-5 flex justify-between items-center space-x-8 relative">
+          {/* Mobile Menu and Search Bar */}
+          <div className="md:hidden">
+            <button onClick={() => setOpen((prev) => !prev)}>
+              <img src={menu} alt="menu" />
+            </button>
 
-          {/* Social Icons */}
-          <ul className="flex items-center space-x-3">
-            <li className="mr-2">Follow us:</li>
-            {contact?.map((item, index) => (
-              <li key={index} className="w-4 h-4">
-                <img
-                  src={item.image}
-                  alt={item.alt}
-                  className="w-full h-full object-contain"
+            {isMobileSearchVisible && (
+              <div className="flex absolute left-0 right-0 mt-5 border bg-white shadow-lg">
+                <Input
+                  className="rounded-none border-none focus:outline-none text-gray-900 w-full py-3"
+                  placeholder="Search for anything..."
+                  type="search"
+                  aria-label="Search"
                 />
-              </li>
-            ))}
-          </ul>
-        </section>
-
-        <div className="bg-slate-400 h-[0.5px] width w-full opacity-50"></div>
-
-        <section className="width w-full py-5 flex justify-between items-center gap-5">
-          <div>
-            <h2 className=" text-3xl font-bold text-nowrap">Digital Store</h2>
+                <Button
+                  className="bg-white rounded-none hover:bg-white pl-0 pr-3"
+                  aria-label="Search"
+                >
+                  <img src={search} alt="Search icon" />
+                </Button>
+              </div>
+            )}
           </div>
 
+          {/* Logo */}
           <div>
+            <h1 className="text-2xl md:text-3xl font-bold whitespace-nowrap relative md:-left-8">
+              Digital Store
+            </h1>
+          </div>
+
+          {/* Desktop Search Bar */}
+          <div className="hidden md:flex items-center min-w-[15rem] md:w-[20rem] lg:w-[25rem] xl:w-[40rem]">
             <Input
-              className="bg-white w-[20rem] rounded-none text-gray-900"
+              className="bg-white rounded-none border-none focus:outline-none text-gray-900"
               placeholder="Search for anything..."
               type="search"
+              aria-label="Search"
             />
+            <Button
+              className="bg-white rounded-none hover:bg-slate-50 pl-0 pr-3"
+              aria-label="Search"
+            >
+              <img src={search} alt="Search icon" />
+            </Button>
           </div>
 
-          <nav className="">
-            <ul className="flex items-center space-x-5">
-              {navItem?.map((item, index) => (
-                <li
-                  key={index}
-                  className={cn(
-                    "",
-                    index + 1 == navItem.length ? "hidden md:block" : "block"
-                  )}
-                >
-                  <img src={item?.image} alt={item?.alt} />
-                </li>
-              ))}
+          {/* Navigation Icons */}
+          <nav aria-label="User Navigation" className="shrink-0">
+            <ul className="flex items-center space-x-4 md:space-x-5">
+              <li className="hidden md:block">
+                <img src={whiteCart} alt="Cart" />
+              </li>
+              <li>
+                <img src={whiteLove} alt="Wishlist" />
+              </li>
+
+              <li
+                className="block md:hidden"
+                onClick={() => setMobileSearchVisible((prev) => !prev)}
+              >
+                <img src={whiteSearch} alt="Search icon" />
+              </li>
+
+              <li className="hidden md:block">
+                <img src={person} alt="Account" />
+              </li>
             </ul>
           </nav>
         </section>
       </div>
-    </header>
+    </motion.header>
   );
 }
